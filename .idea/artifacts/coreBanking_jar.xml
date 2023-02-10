@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="coreBanking:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/coreBanking_jar</output-path>
+    <root id="archive" name="coreBanking.jar">
+      <element id="module-output" name="coreBanking" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/mysql-connector-j-8.0.31.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/protobuf-java-3.19.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>
