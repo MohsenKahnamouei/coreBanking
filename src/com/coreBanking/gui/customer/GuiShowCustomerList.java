@@ -1,9 +1,5 @@
 package com.coreBanking.gui.customer;
 
-import com.coreBanking.customer.CustomerManeger;
-import com.coreBanking.gui.customer.GuiOrgCustListView;
-import com.coreBanking.gui.customer.GuiRealCustListview;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -16,7 +12,6 @@ public class GuiShowCustomerList {
         Container container = getContentPane();
         JButton realCustomerListViewButton = new JButton("Real Customer List View");
         JButton orgCustomerListViewButton = new JButton("Org Customer List View");
-
 
 
         public showCustomerList() {
@@ -36,7 +31,6 @@ public class GuiShowCustomerList {
             orgCustomerListViewButton.setBounds(20, 80, 200, 30);
 
 
-
         }
 
         public void addComponentsToContainer() {
@@ -53,13 +47,10 @@ public class GuiShowCustomerList {
         }
 
 
-
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            CustomerManeger customerManeger=new CustomerManeger();
             if (e.getSource() == realCustomerListViewButton) {
-                GuiRealCustListview.showRealCustomerList showRealCustomerList= null;
+                GuiRealCustListview.showRealCustomerList showRealCustomerList = null;
                 try {
                     showRealCustomerList = new GuiRealCustListview.showRealCustomerList();
                 } catch (SQLException sqlException) {
@@ -74,7 +65,7 @@ public class GuiShowCustomerList {
             }
 
             if (e.getSource() == orgCustomerListViewButton) {
-                GuiOrgCustListView.showOrgCustomerList showOrgCustomerList= null;
+                GuiOrgCustListView.showOrgCustomerList showOrgCustomerList = null;
                 try {
                     showOrgCustomerList = new GuiOrgCustListView.showOrgCustomerList();
                 } catch (SQLException sqlException) {

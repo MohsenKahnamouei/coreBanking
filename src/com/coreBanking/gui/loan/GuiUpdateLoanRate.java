@@ -1,13 +1,11 @@
 package com.coreBanking.gui.loan;
 
-import com.coreBanking.cash.CashManager;
 import com.coreBanking.loan.LoanManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiUpdateLoanRate {
     public static class updateLoanRate extends JFrame implements ActionListener {
@@ -52,10 +50,14 @@ public class GuiUpdateLoanRate {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            LoanManager loanManager=new LoanManager();
-            String rate=RateTextField.getText();
-            loanManager.updateLoanRate(Integer.parseInt(rate));
-            JOptionPane.showMessageDialog(this,"Opration Is Done");
+            LoanManager loanManager = new LoanManager();
+            String rate = RateTextField.getText();
+            try {
+                loanManager.updateLoanRate(Integer.parseInt(rate));
+                JOptionPane.showMessageDialog(this, "Opration Is Done");
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Input Number Is Not Correct");
+            }
         }
     }
 

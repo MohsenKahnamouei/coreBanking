@@ -9,7 +9,6 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class GuiLoginForm {
-    GuiManger guiManger = new GuiManger();
 
     public static class LoginFrame extends JFrame implements ActionListener {
 
@@ -75,17 +74,17 @@ public class GuiLoginForm {
                 pwdText = passwordField.getText();
 
                 try {
-                    if (guiManger.mngUser(userText) == userText && guiManger.mngPass(userText, pwdText) == pwdText && Integer.parseInt(userText)==1) {
+                    if (guiManger.mngUser(userText) == userText && guiManger.mngPass(userText, pwdText) == pwdText && Integer.parseInt(userText) == 1) {
                         JOptionPane.showMessageDialog(this, "Login Successful");
-                        GuiMainMenu1.MainMenu1 frame2=new GuiMainMenu1.MainMenu1();
+                        GuiMainMenu1.MainMenu1 frame2 = new GuiMainMenu1.MainMenu1();
                         frame2.setTitle("Main menu");
                         frame2.setVisible(true);
                         frame2.setBounds(10, 10, 370, 600);
                         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         frame2.setResizable(false);
-                    } else if (guiManger.mngUser(userText) == userText && guiManger.mngPass(userText, pwdText) == pwdText && Integer.parseInt(userText)==2) {
+                    } else if (guiManger.mngUser(userText) == userText && guiManger.mngPass(userText, pwdText) == pwdText && Integer.parseInt(userText) == 2) {
                         JOptionPane.showMessageDialog(this, "Login Successful");
-                        GuiMainMenu2.MainMenu2 frame3=new GuiMainMenu2.MainMenu2();
+                        GuiMainMenu2.MainMenu2 frame3 = new GuiMainMenu2.MainMenu2();
                         frame3.setTitle("Main menu");
                         frame3.setVisible(true);
                         frame3.setBounds(10, 10, 370, 600);
@@ -94,10 +93,8 @@ public class GuiLoginForm {
                     } else {
                         JOptionPane.showMessageDialog(this, "Invalid Username or Password");
                     }
-                } catch (UserNotFoundException userNotFoundException) {
+                } catch (UserNotFoundException | SQLException userNotFoundException) {
                     userNotFoundException.printStackTrace();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
                 }
 
             }

@@ -1,13 +1,11 @@
 package com.coreBanking.gui.cash;
 
 import com.coreBanking.cash.CashManager;
-import com.coreBanking.customer.CustomerManeger;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiCashBoxBalance {
     public static class cashBoxBalance extends JFrame implements ActionListener {
@@ -52,14 +50,19 @@ public class GuiCashBoxBalance {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            CashManager cashManager=new CashManager();
-            String cashId=cashIdTextField.getText();
+            CashManager cashManager = new CashManager();
+            String cashId = cashIdTextField.getText();
             try {
-                float balance=cashManager.getcashIdBalance(Integer.parseInt(cashId));
-                JOptionPane.showMessageDialog(this,balance);
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
+                if (cashManager.findCashId(Integer.parseInt(cashId))) {
+                    float balance = cashManager.getcashIdBalance(Integer.parseInt(cashId));
+                    JOptionPane.showMessageDialog(this, balance);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Cash Id Is Not Correct");
+                }
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Cash Id Is Not Correct");
             }
+
         }
     }
 }

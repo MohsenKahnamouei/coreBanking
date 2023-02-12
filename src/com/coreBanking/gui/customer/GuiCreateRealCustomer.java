@@ -86,10 +86,22 @@ public class GuiCreateRealCustomer {
                 codemeli = codemeliTextField.getText();
                 id = idTextField.getText();
                 address = addressTextField.getText();
-                Object customer = customerManeger.createRealCustomer(Integer.parseInt(id)
-                        , 0, address, fname, lname, codemeli);
-                JOptionPane.showMessageDialog(this, "Customer Create Successful");
-                JOptionPane.showMessageDialog(this, customer);
+                try {
+                    if (!customerManeger.findCustomerByCodemeli(codemeli)) {
+                        if (!customerManeger.findCustomerById(Integer.parseInt(id))) {
+                            Object customer = customerManeger.createRealCustomer(Integer.parseInt(id)
+                                    , 0, address, fname, lname, codemeli);
+                            JOptionPane.showMessageDialog(this, "Customer Create Successful");
+                            JOptionPane.showMessageDialog(this, customer);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Customer Id Is Exists");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Codemeli Is Exists");
+                    }
+                } catch (NumberFormatException numberFormatException) {
+                    JOptionPane.showMessageDialog(this, "Input Number Is Not Valid");
+                }
 
             }
         }

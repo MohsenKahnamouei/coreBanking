@@ -12,11 +12,7 @@ public class CashDb {
 
     public Object getBalance(int cashId) {
         Object balance = 0;
-        try {
-            dbManeger.excuteQuery("select a.balance from mysql.cash a where a.cashid=?");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        dbManeger.excuteQuery("select a.balance from mysql.cash a where a.cashid=?");
         dbManeger.setInt(1, cashId);
         try {
             balance = dbManeger.executeResults(1);
@@ -28,21 +24,13 @@ public class CashDb {
     }
 
     public void increaseBalance(int cashId, float amount, float newAmount) {
-        try {
-            dbManeger.executeUpdate("update mysql.cash a set a.balance=? where a.cashid=?");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        dbManeger.executeUpdate("update mysql.cash a set a.balance=? where a.cashid=?");
         dbManeger.setfloat(1, newAmount);
         dbManeger.setInt(2, cashId);
         dbManeger.DMLUpdade();
-        try {
-            dbManeger.executeUpdate("insert into mysql.deposittransaction (depid, amount, trnid," +
-                    " drcrtyp, trndate,trndesc,refsystem)" +
-                    " values (?,?,?,?,?,?,?)");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        dbManeger.executeUpdate("insert into mysql.deposittransaction (depid, amount, trnid," +
+                " drcrtyp, trndate,trndesc,refsystem)" +
+                " values (?,?,?,?,?,?,?)");
         dbManeger.setInt(1, cashId);
         dbManeger.setfloat(2, amount);
         dbManeger.setInt(3, 2);
@@ -55,21 +43,13 @@ public class CashDb {
     }
 
     public void decreaseBalance(int cashId, float amount, float newAmount) {
-        try {
-            dbManeger.executeUpdate("update mysql.cash a set a.balance=? where a.cashid=?");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        dbManeger.executeUpdate("update mysql.cash a set a.balance=? where a.cashid=?");
         dbManeger.setfloat(1, newAmount);
         dbManeger.setInt(2, cashId);
         dbManeger.DMLUpdade();
-        try {
-            dbManeger.executeUpdate("insert into mysql.deposittransaction (depid, amount, trnid," +
-                    " drcrtyp, trndate,trndesc,refsystem)" +
-                    " values (?,?,?,?,?,?,?)");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        dbManeger.executeUpdate("insert into mysql.deposittransaction (depid, amount, trnid," +
+                " drcrtyp, trndate,trndesc,refsystem)" +
+                " values (?,?,?,?,?,?,?)");
         dbManeger.setInt(1, cashId);
         dbManeger.setfloat(2, amount);
         dbManeger.setInt(3, 3);
@@ -82,11 +62,7 @@ public class CashDb {
     }
 
     public boolean findCashId(int cashId) {
-        try {
-            dbManeger.excuteQuery("select * from mysql.cash a where a.cashid=?");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
+        dbManeger.excuteQuery("select * from mysql.cash a where a.cashid=?");
         dbManeger.setInt(1, cashId);
         try {
             if (Integer.parseInt(dbManeger.executeResults(1).toString()) != 0) {
@@ -97,4 +73,5 @@ public class CashDb {
         }
         return false;
     }
+
 }

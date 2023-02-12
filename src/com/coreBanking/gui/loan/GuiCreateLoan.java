@@ -1,18 +1,21 @@
 package com.coreBanking.gui.loan;
 
 import com.coreBanking.cash.CashManager;
+import com.coreBanking.customer.CustomerManeger;
+import com.coreBanking.deposit.DepositManager;
 import com.coreBanking.loan.LoanManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiCreateLoan {
     public static class createLoan extends JFrame implements ActionListener {
 
         Container container = getContentPane();
+        CustomerManeger customerManeger = new CustomerManeger();
+        DepositManager depositManager = new DepositManager();
 
         JLabel customerIdLable = new JLabel("Customer Id");
         JLabel amountLoanLable = new JLabel("Loan Amount");
@@ -74,26 +77,33 @@ public class GuiCreateLoan {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            LoanManager loanManager=new LoanManager();
-            CashManager cashManager=new CashManager();
+            LoanManager loanManager = new LoanManager();
+            CashManager cashManager = new CashManager();
 
-            String customerId,amountLoan,payCount,depNum;
-            customerId=customerIdTextField.getText();
-            amountLoan=amountLoanTextField.getText();
-            payCount=payCountTextField.getText();
-            depNum=depNumTextField.getText();
-
-
+            String customerId, amountLoan, payCount, depNum;
+            customerId = customerIdTextField.getText();
+            amountLoan = amountLoanTextField.getText();
+            payCount = payCountTextField.getText();
+            depNum = depNumTextField.getText();
 
             try {
-                if (Float.parseFloat(amountLoan)<=cashManager.getcashIdBalance(1)) {
-                    loanManager.createLoanForCustomer(Integer.parseInt(customerId), Float.parseFloat(amountLoan), Integer.parseInt(payCount), depNum);
-                    JOptionPane.showMessageDialog(this,"Loan Pay To Deposit");
-                } else {JOptionPane.showMessageDialog(this,"CashBox Has Not Request Amount");}
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
+                if (customerManeger.findCustomerById(Integer.parseInt(customerId))) {
+                    if (depositManager.findDep1(depNum)) {
+                        if (Float.parseFloat(amountLoan) <= cashManager.getcashIdBalance(1)) {
+                            loanManager.createLoanForCustomer(Integer.parseInt(customerId), Float.parseFloat(amountLoan), Integer.parseInt(payCount), depNum);
+                            JOptionPane.showMessageDialog(this, "Loan Pay To Deposit");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "CashBox Has Not Request Amount");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Deposit Number Is Not Correct");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Customer Number Is Not Currect");
+                }
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Input Number Is Not Correct");
             }
-
 
         }
     }

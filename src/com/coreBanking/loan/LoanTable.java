@@ -13,8 +13,7 @@ public class LoanTable {
     Date Sarresidghest;
 
     public LoanTable(int custid, int loanSerial, int paynum,
-           float ghestamount, float aslamount, float sudamount, int paystate, Date sarresidghest)
-    {
+                     float ghestamount, float aslamount, float sudamount, int paystate, Date sarresidghest) {
         this.custid = custid;
         this.loanSerial = loanSerial;
         this.paynum = paynum;

@@ -1,18 +1,13 @@
 package com.coreBanking.gui.loan;
 
-
-import com.coreBanking.loan.LoanManager;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 
 public class GuiShowLoanDetails {
     public static class showLoanDetails extends JFrame implements ActionListener {
-        LoanManager loanManager=new LoanManager();
         Container container = getContentPane();
 
         JLabel customerIdLable = new JLabel("Customer Id");
@@ -67,21 +62,18 @@ public class GuiShowLoanDetails {
             String customerId, serial;
             customerId = customerIdTextField.getText();
             serial = serialTextField.getText();
-            GuiShowLoanPaymentList.showLoanPaymentList showLoanPaymentList= null;
-            try {
-                showLoanPaymentList = new GuiShowLoanPaymentList.showLoanPaymentList(Integer.parseInt(customerId),Integer.parseInt(serial));
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
-            }
 
 
             if (e.getSource() == acceptButton) {
-
-                showLoanPaymentList.setTitle("Loan Payment List");
-                showLoanPaymentList.setVisible(true);
-                showLoanPaymentList.setBounds(30, 30, 1000, 1000);
-                showLoanPaymentList.setResizable(false);
-
+                try {
+                    GuiShowLoanPaymentList.showLoanPaymentList showLoanPaymentList = new GuiShowLoanPaymentList.showLoanPaymentList(Integer.parseInt(customerId), Integer.parseInt(serial));
+                    showLoanPaymentList.setTitle("Loan Payment List");
+                    showLoanPaymentList.setVisible(true);
+                    showLoanPaymentList.setBounds(30, 30, 1000, 1000);
+                    showLoanPaymentList.setResizable(false);
+                } catch (NumberFormatException numberFormatException) {
+                    JOptionPane.showMessageDialog(this, "Input Number Is Not Currect");
+                }
             }
         }
     }

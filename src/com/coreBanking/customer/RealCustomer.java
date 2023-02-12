@@ -6,7 +6,6 @@ public class RealCustomer extends Customer {
     private String codemeli;
 
 
-
     public RealCustomer(int id, int customertype, String address, String fname, String lname, String codeMeli) {
         super(id, customertype, address);
         this.fname = fname;
@@ -39,7 +38,7 @@ public class RealCustomer extends Customer {
         this.codemeli = codemeli;
     }
 
-        @Override
+    @Override
     public String toString() {
         return "RealCustomer{" +
                 "fname='" + fname + '\'' +

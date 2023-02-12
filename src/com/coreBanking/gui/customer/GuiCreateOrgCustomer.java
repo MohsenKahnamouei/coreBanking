@@ -78,9 +78,17 @@ public class GuiCreateOrgCustomer {
                 shomaresabt = shomareSabtTextField.getText();
                 id = idTextField.getText();
                 address = addressTextField.getText();
-                Object customer = customerManeger.createOrgCustomer(Integer.parseInt(id),1,address,fullname,shomaresabt);
-                JOptionPane.showMessageDialog(this, "Customer Create Successful");
-                JOptionPane.showMessageDialog(this, customer);
+                try {
+                    if (!customerManeger.findCustomerById(Integer.parseInt(id))) {
+                        Object customer = customerManeger.createOrgCustomer(Integer.parseInt(id), 1, address, fullname, shomaresabt);
+                        JOptionPane.showMessageDialog(this, "Customer Create Successful");
+                        JOptionPane.showMessageDialog(this, customer);
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Customer ID IS Exist");
+                    }
+                } catch (NumberFormatException numberFormatException) {
+                    JOptionPane.showMessageDialog(this, "Number Format Is Not Correct");
+                }
 
             }
         }

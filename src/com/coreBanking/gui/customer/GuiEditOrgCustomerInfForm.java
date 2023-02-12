@@ -24,7 +24,6 @@ public class GuiEditOrgCustomerInfForm {
         JButton DoItButton = new JButton("Do It");
 
 
-
         public EditOrgCustomerForm() {
             setLayoutManager();
             setLocationAndSize();
@@ -74,22 +73,21 @@ public class GuiEditOrgCustomerInfForm {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String fullname,shomaresabt,address;
+            String fullname, shomaresabt, address;
             String id;
-            GuiEditOrgCustomer.EditOrgCustomerById editOrgCustomerById=new GuiEditOrgCustomer.EditOrgCustomerById();
-            CustomerManeger customerManeger=new CustomerManeger();
+            GuiEditOrgCustomer.EditOrgCustomerById editOrgCustomerById = new GuiEditOrgCustomer.EditOrgCustomerById();
+            CustomerManeger customerManeger = new CustomerManeger();
             if (e.getSource() == DoItButton) {
-                id=idTextField.getText();
-                fullname=fullnameTextField.getText();
-                shomaresabt=shomaresabtTextField.getText();
-                address=addressTextField.getText();
+                id = idTextField.getText();
+                fullname = fullnameTextField.getText();
+                shomaresabt = shomaresabtTextField.getText();
+                address = addressTextField.getText();
                 try {
-                    customerManeger.editOrgCustomer(Integer.parseInt(id),address,fullname,shomaresabt);
+                    customerManeger.editOrgCustomer(Integer.parseInt(id), address, fullname, shomaresabt);
                 } catch (SQLIntegrityConstraintViolationException | SQLException sqlIntegrityConstraintViolationException) {
                     JOptionPane.showMessageDialog(this, "This data Exist In Data Base,Opration Faild");
                 }
                 JOptionPane.showMessageDialog(this, "Opration Is Done");
-
 
 
             }

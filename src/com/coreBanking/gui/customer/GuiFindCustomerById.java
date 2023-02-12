@@ -1,7 +1,5 @@
 package com.coreBanking.gui.customer;
 
-import com.coreBanking.customer.CustomerManeger;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +12,6 @@ public class GuiFindCustomerById {
 
         JButton findRealCustomerButtom = new JButton("Find Real Customer");
         JButton findOrgCustomerButtom = new JButton("Find Org Customer");
-
-
-
 
 
         public FindCustomerById() {
@@ -52,14 +47,11 @@ public class GuiFindCustomerById {
         }
 
 
-
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            CustomerManeger customerManeger=new CustomerManeger();
 
             if (e.getSource() == findRealCustomerButtom) {
-                GuiFindRealCustomer.FindRealCustomer findRealCustomer=new GuiFindRealCustomer.FindRealCustomer();
+                GuiFindRealCustomer.FindRealCustomer findRealCustomer = new GuiFindRealCustomer.FindRealCustomer();
                 findRealCustomer.setTitle("Real Customer Details");
                 findRealCustomer.setVisible(true);
                 findRealCustomer.setBounds(10, 10, 370, 600);
@@ -67,7 +59,7 @@ public class GuiFindCustomerById {
 
             }
             if (e.getSource() == findOrgCustomerButtom) {
-                GuiFindOrgCustomer.FindOrgCustomer findOrgCustomer=new GuiFindOrgCustomer.FindOrgCustomer();
+                GuiFindOrgCustomer.FindOrgCustomer findOrgCustomer = new GuiFindOrgCustomer.FindOrgCustomer();
                 findOrgCustomer.setTitle("Org Customer Details");
                 findOrgCustomer.setVisible(true);
                 findOrgCustomer.setBounds(10, 10, 370, 600);

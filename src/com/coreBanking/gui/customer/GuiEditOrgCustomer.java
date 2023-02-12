@@ -3,7 +3,6 @@ package com.coreBanking.gui.customer;
 import com.coreBanking.customer.CustomerManeger;
 import com.coreBanking.customer.OrgCustomer;
 import com.coreBanking.exception.CustomerNotFoundException;
-import com.coreBanking.gui.customer.GuiEditOrgCustomerInfForm;
 
 import javax.swing.*;
 import java.awt.*;
@@ -66,14 +65,13 @@ public class GuiEditOrgCustomer {
 
             if (e.getSource() == serchButtom) {
                 String customerid = serchNumberTextField.getText();
-                Object customerInf = null;
                 try {
 
                     if (customerManeger.findOrgCustomerById2(Integer.parseInt(customerid))) {
                         list.add(customerManeger.findOrgCustomerById(Integer.parseInt(customerid)));
                         editOrgCustomerForm.idTextField.setText(String.valueOf(list.get(0).getId()));
-                        editOrgCustomerForm.fullnameTextField.setText(list.get(0).getFullName().toString());
-                        editOrgCustomerForm.shomaresabtTextField.setText(list.get(0).getShomareSabt().toString());
+                        editOrgCustomerForm.fullnameTextField.setText(list.get(0).getFullName());
+                        editOrgCustomerForm.shomaresabtTextField.setText(list.get(0).getShomareSabt());
                         editOrgCustomerForm.addressTextField.setText(list.get(0).getAddress());
                         editOrgCustomerForm.setTitle("Find Customer");
                         editOrgCustomerForm.setVisible(true);
@@ -82,7 +80,7 @@ public class GuiEditOrgCustomer {
                     }
 
 
-                } catch (CustomerNotFoundException | SQLException customerNotFoundException) {
+                } catch (CustomerNotFoundException | NumberFormatException  customerNotFoundException) {
                     JOptionPane.showMessageDialog(this, "Customer Number Is not Correct");
                 }
 

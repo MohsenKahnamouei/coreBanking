@@ -7,8 +7,8 @@ public class Amortization {
     int peymentCount;// * تعداد اقساط *
     float peymentAmount;// * مبلغ هر قسط *
     float hideProfitPeyment; // * سود مستتر در قسط *
-    int k ;// * تعداد اقساط پرداخت نشده قبل از پرداخت *
-    int l ;// * تعداد اقساط پرداخت نشده بعد از پرداخت *
+    int k;// * تعداد اقساط پرداخت نشده قبل از پرداخت *
+    int l;// * تعداد اقساط پرداخت نشده بعد از پرداخت *
 
     public float getTotalProfitAmount() {
         return totalProfitAmount;

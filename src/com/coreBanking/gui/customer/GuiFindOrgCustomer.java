@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiFindOrgCustomer {
     public static class FindOrgCustomer extends JFrame implements ActionListener {
@@ -17,9 +16,6 @@ public class GuiFindOrgCustomer {
         JButton serchButtom = new JButton("search");
         JLabel serchLabel = new JLabel("Customer Number: ");
         JTextField serchNumberTextField = new JTextField();
-
-
-
 
 
         public FindOrgCustomer() {
@@ -40,7 +36,6 @@ public class GuiFindOrgCustomer {
             serchButtom.setBounds(150, 300, 100, 30);
 
 
-
         }
 
         public void addComponentsToContainer() {
@@ -57,24 +52,22 @@ public class GuiFindOrgCustomer {
         }
 
 
-
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            CustomerManeger customerManeger=new CustomerManeger();
+            CustomerManeger customerManeger = new CustomerManeger();
 
 
             if (e.getSource() == serchButtom) {
-                String customerid=serchNumberTextField.getText();
+                String customerid = serchNumberTextField.getText();
                 Object customerInf = null;
                 try {
 
                     if (customerManeger.findOrgCustomerById2(Integer.parseInt(customerid)))
-                        customerInf=customerManeger.findOrgCustomerById(Integer.parseInt(customerid));
-                    JOptionPane.showMessageDialog(this,customerInf );
+                        customerInf = customerManeger.findOrgCustomerById(Integer.parseInt(customerid));
+                    JOptionPane.showMessageDialog(this, customerInf);
 
-                }catch(CustomerNotFoundException | SQLException customerNotFoundException){
-                    JOptionPane.showMessageDialog(this,"Customer Number Is not Correct");
+                } catch (CustomerNotFoundException | NumberFormatException customerNotFoundException) {
+                    JOptionPane.showMessageDialog(this, "Customer Number Is not Correct");
                 }
 
 

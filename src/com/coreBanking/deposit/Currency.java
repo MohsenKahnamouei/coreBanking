@@ -5,21 +5,33 @@ import com.coreBanking.db.DbManeger;
 import java.sql.SQLException;
 
 public class Currency {
-    DbManeger dbManeger=new DbManeger();
+    DbManeger dbManeger = new DbManeger();
 
 
-    public int findCurrencyById(int id) throws SQLException {
+    public int findCurrencyById(int id) {
+        int currency = 0;
         dbManeger.excuteQuery("select a.id from mysql.currency a where a.id=?");
-        dbManeger.setInt(1,id);
-        int currencyId= Integer.parseInt(dbManeger.executeResults(1).toString());
-        return currencyId;
+        dbManeger.setInt(1, id);
+        try {
+            currency = Integer.parseInt(dbManeger.executeResults(1).toString());
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return currency;
+
     }
 
-    public Object findCurrencyById2(int id) throws SQLException {
+    public Object findCurrencyById2(int id) {
+        Object currency = null;
         dbManeger.excuteQuery("select * from mysql.currency a where a.id=?");
-        dbManeger.setInt(1,id);
-        Object currencyIdName= dbManeger.executeResults(2);
-        return currencyIdName;
+        dbManeger.setInt(1, id);
+        try {
+            currency = dbManeger.executeResults(2);
+        } catch (SQLException sqlException) {
+            sqlException.printStackTrace();
+        }
+        return currency;
+
     }
 }
 

@@ -17,7 +17,7 @@ public class Deposit {
         this.balance = balance;
         this.depositNumber = depositNumber;
         this.depositTitle = depositTitle;
-        this.depositType=depositType;
+        this.depositType = depositType;
     }
 
 
@@ -38,10 +38,6 @@ public class Deposit {
 
     public int getCurrency() {
         return currencyId;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currencyId = currencyId;
     }
 
     public float getBalance() {
@@ -76,7 +72,7 @@ public class Deposit {
                 ", balance=" + balance +
                 ", depositNumber='" + depositNumber + '\'' +
                 ", depositTitle='" + depositTitle + '\'' +
-                ", depositType='" + depositType+'\'' +
+                ", depositType='" + depositType + '\'' +
                 '}';
     }
 }

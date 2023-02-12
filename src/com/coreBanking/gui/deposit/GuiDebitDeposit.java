@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiDebitDeposit {
     public static class debitDeposit extends JFrame implements ActionListener {
@@ -64,23 +63,22 @@ public class GuiDebitDeposit {
         @Override
         public void actionPerformed(ActionEvent e) {
             String depnum, amount;
-            boolean doIt=true;
             depnum = depnumTextField.getText();
             amount = amountTextField.getText();
-
             try {
-                doIt = depositManager.debitDepositBalance(depnum, Long.parseLong(amount));
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
+                if (depositManager.findDep1(depnum)) {
+                    if (depositManager.getDepositBalance(depnum) - Float.parseFloat(amount) > 0) {
+                        depositManager.debitDepositBalance(depnum, Long.parseLong(amount));
+                        JOptionPane.showMessageDialog(this, "Opration is successfull");
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Deposit Has Not Enogh Balance");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Deposit Number Is Not Correct");
+                }
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Input Number Is Not Correct");
             }
-            if (doIt == true) {
-                JOptionPane.showMessageDialog(this, "Opration is successfull");
-                return;
-
-            }
-            JOptionPane.showMessageDialog(this, "Opration is not successfull");
-
-
 
         }
     }

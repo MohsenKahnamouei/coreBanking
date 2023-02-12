@@ -7,7 +7,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiFindRealCustomer {
     public static class FindRealCustomer extends JFrame implements ActionListener {
@@ -17,9 +16,6 @@ public class GuiFindRealCustomer {
         JButton serchButtom = new JButton("search");
         JLabel serchLabel = new JLabel("Customer Number: ");
         JTextField serchNumberTextField = new JTextField();
-
-
-
 
 
         public FindRealCustomer() {
@@ -40,7 +36,6 @@ public class GuiFindRealCustomer {
             serchButtom.setBounds(150, 300, 100, 30);
 
 
-
         }
 
         public void addComponentsToContainer() {
@@ -57,24 +52,22 @@ public class GuiFindRealCustomer {
         }
 
 
-
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            CustomerManeger customerManeger=new CustomerManeger();
+            CustomerManeger customerManeger = new CustomerManeger();
 
 
             if (e.getSource() == serchButtom) {
-                String customerid=serchNumberTextField.getText();
+                String customerid = serchNumberTextField.getText();
                 Object customerInf = null;
                 try {
 
                     if (customerManeger.findRealCustomerById2(Integer.parseInt(customerid)))
-                        customerInf=customerManeger.findRealCustomerById(Integer.parseInt(customerid));
-                        JOptionPane.showMessageDialog(this,customerInf );
+                        customerInf = customerManeger.findRealCustomerById(Integer.parseInt(customerid));
+                    JOptionPane.showMessageDialog(this, customerInf);
 
-                }catch(CustomerNotFoundException | SQLException customerNotFoundException){
-                    JOptionPane.showMessageDialog(this,"Customer Number Is not Correct");
+                } catch (CustomerNotFoundException | NumberFormatException customerNotFoundException) {
+                    JOptionPane.showMessageDialog(this, "Customer Number Is not Correct");
                 }
 
 

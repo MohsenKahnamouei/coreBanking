@@ -1,12 +1,5 @@
 package com.coreBanking.gui.report;
 
-import com.coreBanking.gui.cash.GuiCashBoxBalance;
-import com.coreBanking.gui.cash.GuiDecreaseCashbox;
-import com.coreBanking.gui.cash.GuiIncreaseCashbox;
-import com.coreBanking.gui.customer.GuiFindCustomerById;
-import com.coreBanking.gui.customer.GuiShowCustomerList;
-import com.coreBanking.gui.loan.GuiUpdateLoanRate;
-import com.coreBanking.loan.LoanManager;
 import com.coreBanking.report.ReportManager;
 
 import javax.swing.*;
@@ -20,13 +13,10 @@ public class GuiTransactioReportFormat {
     public static class TransactioReportFormat extends JFrame implements ActionListener {
 
         Container container = getContentPane();
-        JLabel fileNameLabel=new JLabel("File Name");
-        JTextField fileNameTextField=new JTextField();
+        JLabel fileNameLabel = new JLabel("File Name");
+        JTextField fileNameTextField = new JTextField();
         JButton textFormatButton = new JButton("Text Format");
         JButton excelFormatButton = new JButton("Excle Format");
-
-
-
 
 
         public TransactioReportFormat() {
@@ -48,9 +38,6 @@ public class GuiTransactioReportFormat {
             excelFormatButton.setBounds(170, 150, 100, 30);
 
 
-
-
-
         }
 
         public void addComponentsToContainer() {
@@ -67,23 +54,20 @@ public class GuiTransactioReportFormat {
             excelFormatButton.addActionListener(this);
 
 
-
         }
-
-
 
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            ReportManager reportManager=new ReportManager();
-            String fileName=fileNameTextField.getText();
+            ReportManager reportManager = new ReportManager();
+            String fileName = fileNameTextField.getText();
             if (e.getSource() == textFormatButton) {
                 try {
                     reportManager.saveTransaction(fileName);
                 } catch (IOException ioException) {
                     ioException.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(this,"Opratioen Is Done");
+                JOptionPane.showMessageDialog(this, "Opratioen Is Done");
 
             }
 
@@ -93,10 +77,9 @@ public class GuiTransactioReportFormat {
                 } catch (SQLException sqlException) {
                     sqlException.printStackTrace();
                 }
-                JOptionPane.showMessageDialog(this,"Opratioen Is Done");
+                JOptionPane.showMessageDialog(this, "Opratioen Is Done");
 
             }
-
 
 
         }

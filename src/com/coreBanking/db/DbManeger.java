@@ -24,10 +24,7 @@ public class DbManeger {
     }
 
 
-
-
-
-    public void excuteQuery(String query) throws SQLException {
+    public void excuteQuery(String query) {
         try {
             preparedStatement = getConnection().prepareStatement(query);
         } catch (SQLException throwables) {
@@ -36,10 +33,9 @@ public class DbManeger {
 
     }
 
-    public ResultSet executeQuery2() throws SQLException{
+    public ResultSet executeQuery2() throws SQLException {
         return preparedStatement.executeQuery();
     }
-
 
 
     public Object executeResults(int column) throws SQLException {
@@ -48,16 +44,14 @@ public class DbManeger {
         if (rs.next()) {
             return rs.getString(column);
         } else {
-            int x = 0;
-            return x;
-
+            return 0;
         }
 
 
     }
 
 
-    public void executeUpdate(String query) throws SQLException {
+    public void executeUpdate(String query) {
         try {
             preparedStatement = getConnection().prepareStatement(query);
         } catch (SQLException throwables) {
@@ -115,8 +109,6 @@ public class DbManeger {
             sqlException.printStackTrace();
         }
     }
-
-
 
 
 }

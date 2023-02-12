@@ -6,7 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiTransferAmountDeposit {
     public static class trasferAmount extends JFrame implements ActionListener {
@@ -70,25 +69,28 @@ public class GuiTransferAmountDeposit {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String debitDepnum,creditDepnum, amount;
-            boolean doIt=true;
+            String debitDepnum, creditDepnum, amount;
             debitDepnum = debitDepnumTextField.getText();
-            creditDepnum=creditDepnumTextField.getText();
+            creditDepnum = creditDepnumTextField.getText();
             amount = amountTextField.getText();
-
             try {
-                doIt = depositManager.transferAmount(creditDepnum,debitDepnum,Long.parseLong(amount));
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
+                if (depositManager.findDep1(debitDepnum)) {
+                    if (depositManager.findDep1(creditDepnum)) {
+                        if (depositManager.getDepositBalance(debitDepnum) - Float.parseFloat(amount) >= 0) {
+                            depositManager.transferAmount(creditDepnum, debitDepnum, Long.parseLong(amount));
+                            JOptionPane.showMessageDialog(this, "Opration is successfull");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Debit Deposit Has Not Enogh Balance");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Credit Deposit Is Not Correct");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Debit Deposit Is Not Correct");
+                }
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Input Number Is Not Correct");
             }
-            if (doIt == true) {
-                JOptionPane.showMessageDialog(this, "Opration is successfull");
-                return;
-
-            }
-            JOptionPane.showMessageDialog(this, "Opration is not successfull");
-
-
 
         }
     }

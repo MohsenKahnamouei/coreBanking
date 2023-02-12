@@ -6,20 +6,20 @@ public class AmortizationManager {
 
 
     public float calculateTotalProfitAmount (float loanAmount, float rate, int peymentCount){
-        float totalProfitAmount=(loanAmount*rate*(peymentCount+1)*1)/2400 ;
-        return totalProfitAmount;
+        return(loanAmount*rate*(peymentCount+1)*1)/2400 ;
+
 
     }
 
     public float calucaltePeymentAmount(float loanAmount,int peymentCount,float rate){
         float totalProfitAmount=calculateTotalProfitAmount(loanAmount,rate,peymentCount);
-        float peymentAmount=(loanAmount+totalProfitAmount)/peymentCount;
-        return peymentAmount;
+        return(loanAmount+totalProfitAmount)/peymentCount;
+
 
     }
 
     public ArrayList<Float> calculateHideProfitPeyment (float loanAmount, float rate, int peymentCount){
-        ArrayList<Float> hideProfitlist=new ArrayList<Float>();
+        ArrayList<Float> hideProfitlist=new ArrayList<>();
         float totalProfitAmount=calculateTotalProfitAmount(loanAmount,rate,peymentCount);
         for (int i = 0; i <=peymentCount ; i++) {
             float k=peymentCount-i;
@@ -33,16 +33,4 @@ public class AmortizationManager {
     }
 
 
-
-//    public static void main(String[] args) {
-//        AmortizationManager amortizationManager=new AmortizationManager();
-//        float loanAmount= Long.valueOf(200000);
-//        float rate= Long.valueOf(6);
-//        int peymentCount=12;
-//
-//        System.out.println(amortizationManager.calculateHideProfitPeyment(loanAmount,rate,peymentCount));
-//
-//
-//
-//    }
 }

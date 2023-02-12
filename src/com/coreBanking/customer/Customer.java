@@ -5,14 +5,11 @@ public abstract class Customer {
     private int id;
     String address;
 
-    Customer(){
 
-    }
-
-    Customer(int id, int customertype,String address){
-        this.id=id;
-        this.customertype=customertype;
-        this.address=address;
+    Customer(int id, int customertype, String address) {
+        this.id = id;
+        this.customertype = customertype;
+        this.address = address;
     }
 
     public int getId() {

@@ -1,17 +1,15 @@
 package com.coreBanking.gui.deposit;
 
-import com.coreBanking.customer.CustomerManeger;
 import com.coreBanking.deposit.DepositManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiCreditDeposit {
     public static class CreditDeposit extends JFrame implements ActionListener {
-        DepositManager depositManager=new DepositManager();
+        DepositManager depositManager = new DepositManager();
 
         Container container = getContentPane();
         JLabel depnumLable = new JLabel("Deposit Number ");
@@ -64,16 +62,19 @@ public class GuiCreditDeposit {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String depnum,amount;
-            boolean doIt=true;
-            depnum=depnumTextField.getText();
-            amount=amountTextField.getText();
-            doIt=depositManager.creditDepositBalance(depnum,Long.parseLong(amount));
-            if (doIt==true){
-                JOptionPane.showMessageDialog(this,"Opration is successfull");
-            }
-            else{
-                JOptionPane.showMessageDialog(this,"Opration is not successfull");
+            String depnum, amount;
+            depnum = depnumTextField.getText();
+            amount = amountTextField.getText();
+
+            try {
+                if (depositManager.findDep1(depnum)) {
+                    depositManager.creditDepositBalance(depnum, Long.parseLong(amount));
+                    JOptionPane.showMessageDialog(this, "Opration is successfull");
+                } else {
+                    JOptionPane.showMessageDialog(this, "DEposit Not Exists");
+                }
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Input Number Is Not Correct");
             }
 
         }

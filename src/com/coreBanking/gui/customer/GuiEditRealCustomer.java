@@ -8,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GuiEditRealCustomer {
@@ -65,16 +64,15 @@ public class GuiEditRealCustomer {
 
             if (e.getSource() == serchButtom) {
                 String customerid = serchNumberTextField.getText();
-                Object customerInf = null;
                 try {
 
                     if (customerManeger.findRealCustomerById2(Integer.parseInt(customerid))) {
                         list.add(customerManeger.findRealCustomerById(Integer.parseInt(customerid)));
                         editRealCustomerForm.idTextField.setText(String.valueOf(list.get(0).getId()));
-                        editRealCustomerForm.fnameTextField.setText(list.get(0).getFname().toString());
-                        editRealCustomerForm.lnameTextField.setText(list.get(0).getLname().toString());
-                        editRealCustomerForm.codemeliTextField.setText(list.get(0).getCodemeli().toString());
-                        editRealCustomerForm.addressTextField.setText(list.get(0).getAddress().toString());
+                        editRealCustomerForm.fnameTextField.setText(list.get(0).getFname());
+                        editRealCustomerForm.lnameTextField.setText(list.get(0).getLname());
+                        editRealCustomerForm.codemeliTextField.setText(list.get(0).getCodemeli());
+                        editRealCustomerForm.addressTextField.setText(list.get(0).getAddress());
                         editRealCustomerForm.setTitle("Find Customer");
                         editRealCustomerForm.setVisible(true);
                         editRealCustomerForm.setBounds(10, 10, 370, 600);
@@ -82,7 +80,7 @@ public class GuiEditRealCustomer {
                     }
 
 
-                } catch (CustomerNotFoundException | SQLException customerNotFoundException) {
+                } catch (CustomerNotFoundException | NumberFormatException customerNotFoundException) {
                     JOptionPane.showMessageDialog(this, "Customer Number Is not Correct");
                 }
 

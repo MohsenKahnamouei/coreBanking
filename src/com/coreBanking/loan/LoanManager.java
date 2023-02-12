@@ -14,32 +14,23 @@ public class LoanManager {
     DepositManager depositManager = new DepositManager();
     AmortizationManager amortizationManager = new AmortizationManager();
     OrgFandamental orgFandamental = new OrgFandamental();
-    CashManager cashManager=new CashManager();
+    CashManager cashManager = new CashManager();
 
 
     public void createLoanForCustomer(int customerId, float amountLoan,
-                                      int payCount, String depnum) throws SQLException {
+                                      int payCount, String depnum) {
 
 
-        int serial = loandb.getLoanSerial(customerId);
-        int now = Calendar.getInstance().get(6);
+        int serial = loandb.getLoanSerial(customerId) + 1;
+        int now = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
         int currencyId = 1;
         float profitRate = Float.parseFloat(loandb.getLoanRate().toString());
         float amountProfit = amortizationManager.calculateTotalProfitAmount(amountLoan, profitRate, payCount);
         float ghestAmount = amortizationManager.calucaltePeymentAmount(amountLoan, payCount, profitRate);
 
-        try {
-            loandb.createLoan(customerId, serial, amountLoan, amountProfit, payCount, profitRate, 1);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-
-
-        depositManager.creditDepositBalance(depnum, (long) amountLoan);
-
-
+        loandb.createLoan(customerId, serial, amountLoan, amountProfit, payCount, profitRate, 1);
+        depositManager.creditDepositBalanceForLoan(depnum, (long) amountLoan);
         for (int i = 0; i < payCount; i++) {
-
             float profitAmount = amortizationManager.calculateHideProfitPeyment(amountLoan, profitRate, payCount).get(i);
             float aslamount = ghestAmount - profitAmount;
 
@@ -52,7 +43,7 @@ public class LoanManager {
 
     }
 
-    public void updateLoanRate(int rate){
+    public void updateLoanRate(int rate) {
         try {
             loandb.updateLoanRate(rate);
         } catch (SQLException sqlException) {
@@ -61,48 +52,40 @@ public class LoanManager {
     }
 
 
-    public void getPeyment(int customerId,int serial,int payNumberAz,int payNumberTa,String depnum,float amount){
-        try {
-            loandb.getPeyment(customerId,serial,payNumberAz,payNumberTa,amount);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-
-        try {
-            depositManager.debitDepositBalance(depnum,amount);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-
-        try {
-            cashManager.increaseCashBalance(1,amount);
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-
+    public void getPeyment(int customerId, int serial, int payNumberAz, int payNumberTa, String depnum, float amount) {
+        loandb.getPeyment(customerId, serial, payNumberAz, payNumberTa, amount);
+        depositManager.debitDepositBalance(depnum, amount);
+        cashManager.increaseCashBalance(1, amount);
 
     }
 
-    public ArrayList<LoanTable> showLoanList(int customer,int serial) {
+    public ArrayList<LoanTable> showLoanList(int customer, int serial) {
 
-            return loandb.paymentTable(customer,serial);
-
-    }
-
-    public ArrayList<LoanTable> showLoanListForGetPayment(int customer,int serial) {
-
-        return loandb.getPaymentTable(customer,serial);
+        return loandb.paymentTable(customer, serial);
 
     }
 
-    public float getUnPaymentLoanAmount(int customerId,int serial,int begin,int end){
-        return loandb.getUnPaymentLoanAmount(customerId,serial,begin,end);
+    public ArrayList<LoanTable> showLoanListForGetPayment(int customer, int serial) {
+
+        return loandb.getPaymentTable(customer, serial);
+
     }
 
-    public float getProfitReport(){
+    public float getUnPaymentLoanAmount(int customerId, int serial, int begin, int end) {
+        return loandb.getUnPaymentLoanAmount(customerId, serial, begin, end);
+    }
+
+    public float getProfitReport() {
         return loandb.getProfitReport();
     }
 
+    public boolean findLoan(int customerid) {
+        return loandb.findLoan(customerid);
+    }
+
+    public boolean findLoan2(int customerId, int serial) {
+        return loandb.findLoan2(customerId, serial);
+    }
 
 
 }

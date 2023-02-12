@@ -1,7 +1,7 @@
 package com.coreBanking.cash;
 
 public class Cash {
-    int currencyId,cashID;
+    int currencyId, cashID;
     float balace;
 
     public int getCurrencyId() {

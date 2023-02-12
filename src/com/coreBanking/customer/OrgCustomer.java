@@ -4,11 +4,12 @@ public class OrgCustomer extends Customer {
     String shomareSabt;
     String fullName;
     String address;
-    public OrgCustomer(int id, int customertype,String address ,String shomareSabt, String fullName) {
-        super(id,customertype,address);
-        this.shomareSabt=shomareSabt;
-        this.fullName=fullName;
-        this.address=address;
+
+    public OrgCustomer(int id, int customertype, String address, String shomareSabt, String fullName) {
+        super(id, customertype, address);
+        this.shomareSabt = shomareSabt;
+        this.fullName = fullName;
+        this.address = address;
     }
 
 

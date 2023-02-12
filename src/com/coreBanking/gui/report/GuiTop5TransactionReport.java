@@ -12,20 +12,17 @@ import java.util.ArrayList;
 
 public class GuiTop5TransactionReport {
     public static class top5TransactionReport extends JFrame implements ActionListener {
-        ReportManager reportManager=new ReportManager();
+        ReportManager reportManager = new ReportManager();
         Container container = getContentPane();
 
 
-
         String[][] data1 = new String[6][8];
-        String[] column = {"Transaction Id", "Account", "Amount", "Transaction Name", "Debit/Credit", "Transaction Date","Transaction Description","Refrence System",};
-        JTable transactionListTable = new JTable(data1,column);
+        String[] column = {"Transaction Id", "Account", "Amount", "Transaction Name", "Debit/Credit", "Transaction Date", "Transaction Description", "Refrence System",};
+        JTable transactionListTable = new JTable(data1, column);
         JScrollPane transactionListScrollPane = new JScrollPane(transactionListTable);
 
 
-
-
-        public top5TransactionReport()  {
+        public top5TransactionReport() {
             setLayoutManager();
             setLocationAndSize();
             addComponentsToContainer();
@@ -42,7 +39,6 @@ public class GuiTop5TransactionReport {
             transactionListScrollPane.setBounds(30, 40, 800, 500);
 
 
-
         }
 
         public void addComponentsToContainer() {
@@ -55,7 +51,7 @@ public class GuiTop5TransactionReport {
             ArrayList<TransactionReport> transactions = reportManager.top5TransactionReport();
             int row = 0;
 
-            for (TransactionReport transactionReport:
+            for (TransactionReport transactionReport :
                     transactions) {
                 data1[row][0] = String.valueOf(transactionReport.getTransactionId());
                 data1[row][1] = transactionReport.getAccount();
@@ -67,17 +63,12 @@ public class GuiTop5TransactionReport {
                 data1[row][7] = transactionReport.getRefsystem();
 
 
-                row+=1;
+                row += 1;
             }
 
-            JTable transactionListTable = new JTable(data1,column);
+            JTable transactionListTable = new JTable(data1, column);
             JScrollPane transactionListScrollPane = new JScrollPane(transactionListTable);
         }
-
-
-
-
-
 
 
         @Override

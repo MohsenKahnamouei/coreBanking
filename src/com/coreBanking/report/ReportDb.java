@@ -32,16 +32,13 @@ public class ReportDb {
         return transactionReports;
     }
 
-    public int transactionCount(){
+    public int transactionCount() {
         int transCount = 0;
+
+        dbManeger.excuteQuery("select count(*)\n" +
+                "from mysql.deposittransaction a");
         try {
-            dbManeger.excuteQuery("select count(*)\n" +
-                    "from mysql.deposittransaction a");
-        } catch (SQLException sqlException) {
-            sqlException.printStackTrace();
-        }
-        try {
-            transCount= Integer.parseInt(dbManeger.executeResults(1).toString());
+            transCount = Integer.parseInt(dbManeger.executeResults(1).toString());
         } catch (SQLException sqlException) {
             sqlException.printStackTrace();
         }

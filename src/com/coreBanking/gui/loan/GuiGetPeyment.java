@@ -1,16 +1,20 @@
 package com.coreBanking.gui.loan;
 
 
+import com.coreBanking.deposit.DepositManager;
+import com.coreBanking.loan.LoanManager;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiGetPeyment {
     public static class getLoanPayment extends JFrame implements ActionListener {
 
         Container container = getContentPane();
+        LoanManager loanManager = new LoanManager();
+        DepositManager depositManager = new DepositManager();
 
         JLabel customerIdLable = new JLabel("Customer Id");
         JLabel serialLable = new JLabel("Loan serial: ");
@@ -67,24 +71,31 @@ public class GuiGetPeyment {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String customerID,serial,depnum;
-            customerID=customerIdTextField.getText();
-            serial=serialTextField.getText();
-            depnum=depNumTextField.getText();
-            GuiGetPaymentForm.showLoanPaymentForm showLoanPaymentForm= null;
-            try {
-                showLoanPaymentForm = new GuiGetPaymentForm.showLoanPaymentForm
-                        (Integer.parseInt(customerID),Integer.parseInt(serial),depnum);
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
-            }
+            String customerID, serial, depnum;
+            customerID = customerIdTextField.getText();
+            serial = serialTextField.getText();
+            depnum = depNumTextField.getText();
 
             if (e.getSource() == acceptButton) {
+                try {
+                    if (loanManager.findLoan2(Integer.parseInt(customerID), Integer.parseInt(serial))) {
+                        if (depositManager.findDep1(depnum)) {
+                            GuiGetPaymentForm.showLoanPaymentForm showLoanPaymentForm = new GuiGetPaymentForm.showLoanPaymentForm
+                                    (Integer.parseInt(customerID), Integer.parseInt(serial), depnum);
+                            showLoanPaymentForm.setTitle("Loan Payment Form");
+                            showLoanPaymentForm.setVisible(true);
+                            showLoanPaymentForm.setBounds(30, 30, 1000, 1000);
+                            showLoanPaymentForm.setResizable(false);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Deposit Does Not Exists");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Loan Does Not Exist");
+                    }
 
-                showLoanPaymentForm.setTitle("Loan Payment Form");
-                showLoanPaymentForm.setVisible(true);
-                showLoanPaymentForm.setBounds(30, 30, 1000, 1000);
-                showLoanPaymentForm.setResizable(false);
+                } catch (NumberFormatException numberFormatException) {
+                    JOptionPane.showMessageDialog(this, "Input Number Is Not Currect");
+                }
 
             }
 

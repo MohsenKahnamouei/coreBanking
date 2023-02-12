@@ -1,7 +1,5 @@
 package com.coreBanking.gui.customer;
 
-import com.coreBanking.customer.CustomerManeger;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -14,9 +12,6 @@ public class GuiEditCustomerById {
 
         JButton editRealCustomerButtom = new JButton("Edit Real Customer");
         JButton editOrgCustomerButtom = new JButton("Edit Org Customer");
-
-
-
 
 
         public EditCustomerById() {
@@ -52,14 +47,11 @@ public class GuiEditCustomerById {
         }
 
 
-
-
         @Override
         public void actionPerformed(ActionEvent e) {
-            CustomerManeger customerManeger=new CustomerManeger();
 
             if (e.getSource() == editRealCustomerButtom) {
-                GuiEditRealCustomer.EditRealCustomerById editRealCustomerById=new GuiEditRealCustomer.EditRealCustomerById();
+                GuiEditRealCustomer.EditRealCustomerById editRealCustomerById = new GuiEditRealCustomer.EditRealCustomerById();
                 editRealCustomerById.setTitle("Find Customer");
                 editRealCustomerById.setVisible(true);
                 editRealCustomerById.setBounds(10, 10, 370, 600);
@@ -68,7 +60,7 @@ public class GuiEditCustomerById {
 
             }
             if (e.getSource() == editOrgCustomerButtom) {
-                GuiEditOrgCustomer.EditOrgCustomerById editOrgCustomerById=new GuiEditOrgCustomer.EditOrgCustomerById();
+                GuiEditOrgCustomer.EditOrgCustomerById editOrgCustomerById = new GuiEditOrgCustomer.EditOrgCustomerById();
                 editOrgCustomerById.setTitle("Find Customer");
                 editOrgCustomerById.setVisible(true);
                 editOrgCustomerById.setBounds(10, 10, 370, 600);

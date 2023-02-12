@@ -1,13 +1,13 @@
 package com.coreBanking.gui.customer;
 
-import com.coreBanking.cash.CashManager;
 import com.coreBanking.customer.CustomerManeger;
+import com.coreBanking.deposit.DepositManager;
+import com.coreBanking.loan.LoanManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiDeleteCustomer {
 
@@ -53,15 +53,29 @@ public class GuiDeleteCustomer {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            CustomerManeger customerManeger=new CustomerManeger();
-            String customerId=customerTextField.getText();
+            CustomerManeger customerManeger = new CustomerManeger();
+            DepositManager depositManager = new DepositManager();
+            LoanManager loanManager = new LoanManager();
+
+            String customerId = customerTextField.getText();
             try {
-                boolean accept=customerManeger.deleteCustomer(Integer.parseInt(customerId));
-                if (accept){
-                    JOptionPane.showMessageDialog(this,"Customer Has Been Deleted");
+                if (customerManeger.findCustomerById(Integer.parseInt(customerId))) {
+                    if (!depositManager.findDep(Integer.parseInt(customerId))) {
+                        if (!loanManager.findLoan(Integer.parseInt(customerId))) {
+                            customerManeger.deleteCustomer(Integer.parseInt(customerId));
+                            JOptionPane.showMessageDialog(this, "Opration Is Done");
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Customer Has Loan");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Customer has Deposit");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(this, "Customer Has Not Found");
+
                 }
-            } catch (SQLException sqlException) {
-                sqlException.printStackTrace();
+            } catch (NumberFormatException numberFormatException) {
+                JOptionPane.showMessageDialog(this, "Customer Id Is Not Correct");
             }
         }
     }

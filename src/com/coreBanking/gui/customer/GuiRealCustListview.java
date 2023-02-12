@@ -11,19 +11,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class GuiRealCustListview {
-    public static class showRealCustomerList<i> extends JFrame implements ActionListener {
+    public static class showRealCustomerList extends JFrame implements ActionListener {
         CustomerManeger customerManeger = new CustomerManeger();
         Container container = getContentPane();
-        ArrayList<RealCustomer> customers=customerManeger.showRealCustomerList();
+        ArrayList<RealCustomer> customers = customerManeger.showRealCustomerList();
 
 
         int end = customers.size();
-        String[][] data1 = new String[end+1][6];
+        String[][] data1 = new String[end + 1][6];
         String[] column = {"First Name", "Last Name", "Code Meli", "Customer Type", "Cystomer Id", "Address"};
-        JTable realCustomerListTable = new JTable(data1,column);
+        JTable realCustomerListTable = new JTable(data1, column);
         JScrollPane realCustomerListScrollPane = new JScrollPane(realCustomerListTable);
-
-
 
 
         public showRealCustomerList() throws SQLException {
@@ -43,7 +41,6 @@ public class GuiRealCustListview {
             realCustomerListScrollPane.setBounds(30, 40, 800, 500);
 
 
-
         }
 
         public void addComponentsToContainer() {
@@ -61,7 +58,7 @@ public class GuiRealCustListview {
             }
             int row = 0;
 
-            for (RealCustomer customer:
+            for (RealCustomer customer :
                     customerList) {
                 data1[row][0] = customer.getFname();
                 data1[row][1] = customer.getLname();
@@ -70,17 +67,12 @@ public class GuiRealCustListview {
                 data1[row][4] = String.valueOf(customer.getId());
                 data1[row][5] = customer.getAddress();
 
-                row+=1;
+                row += 1;
             }
 
-            JTable realCustomerListTable = new JTable(data1,column);
+            JTable realCustomerListTable = new JTable(data1, column);
             JScrollPane realCustomerListScrollPane = new JScrollPane(realCustomerListTable);
         }
-
-
-
-
-
 
 
         @Override

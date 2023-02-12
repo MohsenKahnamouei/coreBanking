@@ -6,11 +6,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.sql.SQLException;
 
 public class GuiDecreaseCashbox {
     public static class DecreaseCashbox extends JFrame implements ActionListener {
-        CashManager cashManager=new CashManager();
+        CashManager cashManager = new CashManager();
 
         Container container = getContentPane();
         JLabel cashIdLable = new JLabel("Cash Id ");
@@ -18,8 +17,6 @@ public class GuiDecreaseCashbox {
         JTextField cashIdTextField = new JTextField();
         JTextField amountTextField = new JTextField();
         JButton DoItButton = new JButton("Do It");
-
-
 
 
         public DecreaseCashbox() {
@@ -42,7 +39,6 @@ public class GuiDecreaseCashbox {
             DoItButton.setBounds(120, 250, 150, 30);
 
 
-
         }
 
         public void addComponentsToContainer() {
@@ -58,37 +54,32 @@ public class GuiDecreaseCashbox {
         public void addActionEvent() {
 
             DoItButton.addActionListener(this);
-
-
         }
-
-
 
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            String cashId,amount;
-            float newBalance = Float.parseFloat(null);
+            String cashId, amount;
+            float newBalance;
             if (e.getSource() == DoItButton) {
-                cashId=cashIdTextField.getText();
-                amount=amountTextField.getText();
+                cashId = cashIdTextField.getText();
+                amount = amountTextField.getText();
                 try {
-                    cashManager.decreaseCashBalance(Integer.parseInt(cashId),Float.parseFloat(amount) );
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
+                    if (cashManager.findCashId(Integer.parseInt(cashId))) {
+                        if (cashManager.getcashIdBalance(Integer.parseInt(cashId)) - Integer.parseInt(amount) >= 0) {
+                            cashManager.decreaseCashBalance(Integer.parseInt(cashId), Float.parseFloat(amount));
+                            newBalance = cashManager.getcashIdBalance(Integer.parseInt(cashId));
+                            JOptionPane.showMessageDialog(this, newBalance);
+                        } else {
+                            JOptionPane.showMessageDialog(this, "Teller Has Not Enogh Balance");
+                        }
+                    } else {
+                        JOptionPane.showMessageDialog(this, "Cash Id Is Not Exists");
+                    }
+                } catch (NumberFormatException numberFormatException) {
+                    JOptionPane.showMessageDialog(this, "Input Number Is Not Correct");
                 }
-                try {
-                    newBalance=cashManager.getcashIdBalance(Integer.parseInt(cashId));
-                } catch (SQLException sqlException) {
-                    sqlException.printStackTrace();
-                }
-                JOptionPane.showMessageDialog(this,newBalance);
-
-
             }
-
-
         }
-
     }
 }
