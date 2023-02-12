@@ -23,7 +23,7 @@ public class LoanManager {
 
         int serial = loandb.getLoanSerial(customerId) + 1;
         int now = Calendar.getInstance().get(Calendar.DAY_OF_YEAR);
-        int currencyId = 1;
+       // int currencyId = 1;
         float profitRate = Float.parseFloat(loandb.getLoanRate().toString());
         float amountProfit = amortizationManager.calculateTotalProfitAmount(amountLoan, profitRate, payCount);
         float ghestAmount = amortizationManager.calucaltePeymentAmount(amountLoan, payCount, profitRate);
@@ -34,7 +34,7 @@ public class LoanManager {
             float profitAmount = amortizationManager.calculateHideProfitPeyment(amountLoan, profitRate, payCount).get(i);
             float aslamount = ghestAmount - profitAmount;
 
-            loandb.createLoanTable(currencyId, serial, i + 1
+            loandb.createLoanTable(customerId, serial, i + 1
                     , ghestAmount, aslamount, profitAmount,
                     orgFandamental.CurrentDateTimeExample2(now + ((i + 1) * 30)));
 
