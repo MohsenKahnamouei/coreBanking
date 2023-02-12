@@ -3069,6 +3069,46 @@ create table mysql.users
 	password text not null
 );
 
+
+
+INSERT INTO mysql.users (usercode, username, password) VALUES ('1', 'کارمند', '1234');
+INSERT INTO mysql.users (usercode, username, password) VALUES ('2', 'رئیس', '4321');
+
+
+INSERT INTO mysql.cash (cashid, currencyid, balance) VALUES (1, 1, '0');
+INSERT INTO mysql.cash (cashid, currencyid, balance) VALUES (2, 2, '0');
+
+INSERT INTO mysql.currency (id, currencyname, currencyswift) VALUES (1, 'ریال', 'IRR');
+INSERT INTO mysql.currency (id, currencyname, currencyswift) VALUES (2, 'دلار', 'USD');
+
+
+INSERT INTO mysql.customer_type (customer_type, type_name) VALUES (0, 'حقیقی');
+INSERT INTO mysql.customer_type (customer_type, type_name) VALUES (1, 'حقوقی');
+
+
+INSERT INTO mysql.deposittype (`id(2)`, deptypnam) VALUES (1, 'جاری');
+INSERT INTO mysql.deposittype (`id(2)`, deptypnam) VALUES (2, 'قرض الحسنه');
+INSERT INTO mysql.deposittype (`id(2)`, deptypnam) VALUES (3, 'کوتاه مدت');
+INSERT INTO mysql.deposittype (`id(2)`, deptypnam) VALUES (4, 'بلند مدت');
+INSERT INTO mysql.deposittype (`id(2)`, deptypnam) VALUES (5, 'کوتاه مدت ویژه');
+
+
+
+INSERT INTO mysql.loanrate (rateid, rate) VALUES (1, 20);
+
+
+
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (1, 'افتتاح سپرده', 'D');
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (2, 'افزایش صندوق', 'C');
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (3, 'کاهش صندوق', 'C');
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (4, 'واریز به سپرده از محل صندوق', 'D');
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (5, 'واریز به سپرده از محل صندوق', 'C');
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (6, 'انتقال وجه بین سپرده', 'D');
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (7, 'تشکیل پرونده تسهیلات', 'L');
+INSERT INTO mysql.transaction (trnid, trnname, trnsystem) VALUES (8, 'دریافت قسط تسهیلات', 'L');
+
+
+
 create table performance_schema.users
 (
 	USER char(32) collate utf8mb4_bin null,
